@@ -6,34 +6,103 @@
     <script src="javascripts/vue.js"></script>
     <script src="javascripts/axios.min.js"></script>
     <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <style>
+        .main {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .main>div {
+           margin-top: 20px;
+        }
+
+        .main>div span {
+            display: inline-block;
+            width: 100px;
+            font-size: 20px;
+        }
+
+        .main>div input {
+            width: 200px;
+            font-size: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            margin: 50px auto;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <div>
-            <span>name:</span><input type="text" v-model="name"><br>
-            <span>age:</span><input type="text" v-model="age"><br>
+        <div class="main">
+            <div>
+                <span>项目名称:</span><input type="text" v-model="project">
+            </div>
+            <div>
+                <span>投标单位:</span><input type="text" v-model="company">
+            </div>
+            <div>
+                <span>联系人:</span><input type="text" v-model="name">
+            </div>
+            <div>
+                <span>手机:</span><input type="text" v-model="phoneNum">
+            </div>
+            <div>
+                <span>邮箱:</span><input type="text" v-model="mail">
+            </div>
+            <div>
+                <span>开票信息:</span><input type="text" v-model="billMessage">
+            </div>
         </div>
-        <button @click="test1()">click</button>
+        <button @click="test1()" class="btn">提交</button>
     </div>
     <script>
         var app = new Vue({
             el:"#app",
             data:{
+                project:"",
+                company:"",
                 name:"",
-                age:""
+                phoneNum:"",
+                mail:"",
+                billMessage:"",
+                flag:0
             },
             methods:{
                 test1:function () {
-                    axios({
-                        method: 'post',
-                        url: '/login',
-                        data: {
-                            name: this.name,
-                            age: this.age
-                        }
-                    }).then(function (response) {
-                        // console.log(response);
-                    });
+                    this.flag++;
+                    setTimeout(function () {
+                        app.flag = 0;
+                    },3000);
+                    if(app.project === ""){
+                        alert("请填写项目名称")
+                    } else if(app.company === ""){
+                        alert("请填写投标单位")
+                    } else if(app.name === ""){
+                        alert("请填写联系人")
+                    } else if(app.phoneNum === ""){
+                        alert("请填写手机")
+                    } else if(app.mail === ""){
+                        alert("请填写邮箱")
+                    }else if(app.billMessage === ""){
+                        alert("请填写开票信息")
+                    }else if (this.flag === 1){
+                        axios({
+                            method: 'post',
+                            url: '/login',
+                            data: {
+                                name: this.name,
+                                age: this.age
+                            }
+                        }).then(function (response) {
+                            alert("提交成功！");
+                            console.log("提交成功");
+                        });
+                    }
                 }
             }
         })

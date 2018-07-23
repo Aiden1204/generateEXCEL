@@ -14,7 +14,14 @@ router.post('/login', function(req, res, next) {
     // 读xlsx
     var obj = xlsx.parse("E:/resut.xls");
     console.log(obj[0].data);
-    var x = [req.body.name, req.body.age];
+    var x = [
+        req.body.project,
+        req.body.company,
+        req.body.name,
+        req.body.phoneNum,
+        req.body.mail,
+        req.body.billMessage
+    ];
     obj[0].data.push(x);
     var data = obj;
     // var data = [
