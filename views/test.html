@@ -95,8 +95,12 @@
                             method: 'post',
                             url: '/login',
                             data: {
+                                project: this.project,
+                                company: this.company,
                                 name: this.name,
-                                age: this.age
+                                phoneNum: this.phoneNum,
+                                mail: this.mail,
+                                billMessage: this.billMessage
                             }
                         }).then(function (response) {
                             alert("提交成功！");
