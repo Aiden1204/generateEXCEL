@@ -57,6 +57,9 @@
             <div>
                 <span>开票信息:</span><input type="text" v-model="billMessage">
             </div>
+            <div>
+                <span>领取时间:</span><input type="text" v-model="date">
+            </div>
         </div>
         <button @click="test1()" class="btn">提交</button>
     </div>
@@ -70,7 +73,8 @@
                 phoneNum:"",
                 mail:"",
                 billMessage:"",
-                flag:0
+                flag:0,
+                date:""
             },
             methods:{
                 test1:function () {
@@ -90,6 +94,8 @@
                         alert("请填写邮箱")
                     }else if(app.billMessage === ""){
                         alert("请填写开票信息")
+                    }else if(app.date === ""){
+                        alert("请填写领取时间")
                     }else if (this.flag === 1){
                         axios({
                             method: 'post',
@@ -100,7 +106,8 @@
                                 name: this.name,
                                 phoneNum: this.phoneNum,
                                 mail: this.mail,
-                                billMessage: this.billMessage
+                                billMessage: this.billMessage,
+                                date: this.date
                             }
                         }).then(function (response) {
                             alert("提交成功！");

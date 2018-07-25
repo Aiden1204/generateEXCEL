@@ -20,7 +20,8 @@ router.post('/login', function(req, res, next) {
         req.body.name,
         req.body.phoneNum,
         req.body.mail,
-        req.body.billMessage
+        req.body.billMessage,
+        req.body.date
     ];
     obj[0].data.push(x);
     var data = obj;
